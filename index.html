@@ -3,18 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#4a90e2">
-    <title>Angel AI</title>
+    <meta name="theme-color" content="#121212">
+    <title>ANGEL AI</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
+    <!-- Overlay background to close sidebar when clicked outside -->
+    <div id="sidebar-overlay" class="overlay"></div>
+
     <div id="app">
-        <header>
-            <img src="angel-logo.svg" alt="Angel Logo" class="logo">
-            <h1>Angel AI System</h1>
-        </header>
-        <main>
+        <!-- Sidebar Navigation Drawer -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <img src="angel-logo.svg" alt="Angel Logo" class="logo">
+                    <h2>ANGEL <span class="badge">AI</span></h2>
+                </div>
+                <!-- Fixed Close Button with onclick event & touch handler -->
+                <button id="close-sidebar-btn" class="icon-btn close-btn" aria-label="Close Sidebar" onclick="toggleSidebar(false)">
+                    ✕
+                </button>
+            </div>
+
+            <button class="new-chat-btn">
+                <span>+</span> New conversation
+            </button>
+
+            <nav class="workspace-nav">
+                <span class="nav-title">WORKSPACE</span>
+                <a href="#" class="nav-item active">✦ Chat</a>
+                <a href="#" class="nav-item">◈ Explore prompts</a>
+                <a href="#" class="nav-item">⚙ Settings</a>
+            </nav>
+
+            <div class="recent-chats">
+                <span class="nav-title">RECENT CHATS</span>
+                <div class="chat-item">Write a short, inspiring story about a beginner...</div>
+            </div>
+
+            <div class="user-profile">
+                <div class="avatar">A</div>
+                <div class="user-info">
+                    <span class="username">Guest User</span>
+                    <span class="status">Local prototype</span>
+                </div>
+                <button class="icon-btn">⚙</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-bar">
+                <button id="open-sidebar-btn" class="icon-btn menu-btn" onclick="toggleSidebar(true)">
+                    ☰
+                </button>
+                <h3>ANGEL AI</h3>
+            </header>
+
             <div id="chat-container">
                 <div id="messages"></div>
                 <div class="input-area">
@@ -24,13 +70,12 @@
             </div>
         </main>
     </div>
+
     <script src="app.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('Service Worker registered:', reg.scope))
-                    .catch(err => console.error('Service Worker registration failed:', err));
+                navigator.serviceWorker.register('./sw.js').catch(err => console.error(err));
             });
         }
     </script>

@@ -1,46 +1,39 @@
+// Global Function for Sidebar Toggle
+function toggleSidebar(show) {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    
+    if (show) {
+        sidebar.classList.add('active');
+        overlay.classList.add('active');
+    } else {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    const input = document.getElementById('user-input');
-    const sendBtn = document.getElementById('send-btn');
-    const messages = document.getElementById('messages');
+    const closeBtn = document.getElementById('close-sidebar-btn');
+    const openBtn = document.getElementById('open-sidebar-btn');
+    const overlay = document.getElementById('sidebar-overlay');
 
-    async function sendMessage() {
-        const text = input.value.trim();
-        if (!text) return;
-
-        addMessage('User', text);
-        input.value = '';
-
-        try {
-            const response = await fakeAiResponse(text);
-            addMessage('Angel AI', response);
-        } catch (error) {
-            console.error('Error processing message:', error);
-            addMessage('System', 'Sorry, an error occurred while processing your request.');
-        }
-    }
-
-    function addMessage(sender, text) {
-        const msgDiv = document.createElement('div');
-        msgDiv.className = 'message';
-        msgDiv.innerHTML = `<strong>${sender}:</strong> ${escapeHtml(text)}`;
-        messages.appendChild(msgDiv);
-        messages.scrollTop = messages.scrollHeight;
-    }
-
-    function escapeHtml(str) {
-        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    }
-
-    function fakeAiResponse(query) {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(`Received: "${query}". Angel AI is fully operational and updated.`);
-            }, 500);
+    // Attach Event Listeners explicitly for both click and touchstart
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleSidebar(false);
         });
+        closeBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            toggleSidebar(false);
+        }, { passive: false });
     }
 
-    sendBtn.addEventListener('click', sendMessage);
-    input.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') sendMessage();
-    });
+    if (openBtn) {
+        openBtn.addEventListener('click', () => toggleSidebar(true));
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', () => toggleSidebar(false));
+    }
 });

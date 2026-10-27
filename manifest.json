@@ -1,10 +1,10 @@
 {
-  "name": "Angel AI System",
+  "name": "ANGEL AI",
   "short_name": "AngelAI",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#4a90e2",
+  "background_color": "#0d0d0d",
+  "theme_color": "#181715",
   "icons": [
     {
       "src": "angel-logo.svg",
