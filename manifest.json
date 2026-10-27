@@ -1,10 +1,15 @@
 {
-  "name": "ANGEL AI Chat",
-  "short_name": "ANGEL AI",
-  "description": "A modern AI chatbot interface prototype.",
-  "start_url": "./",
+  "name": "Angel AI System",
+  "short_name": "AngelAI",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#090909",
-  "theme_color": "#090909",
-  "icons": [{"src":"angel-logo.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+  "background_color": "#ffffff",
+  "theme_color": "#4a90e2",
+  "icons": [
+    {
+      "src": "angel-logo.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml"
+    }
+  ]
 }
